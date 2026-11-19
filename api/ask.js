@@ -278,6 +278,7 @@ const NOT_CONFIRMED = {
 };
 
 module.exports = async (req, res) => {
+  if (!(await require("./_lwgate")(req, res, "secrets-of-the-world"))) return;
   res.setHeader("Cache-Control", "no-store");
   if (req.method !== "POST") return res.status(405).json({ error: "POST only" });
   const origin = req.headers.origin || "";

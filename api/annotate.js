@@ -18,6 +18,7 @@ function overLimit(ip, limit) {
 const cache = new Map(); // same photo + labels = same answer, no repeat cost on a warm server
 
 module.exports = async (req, res) => {
+  if (!(await require("./_lwgate")(req, res, "secrets-of-the-world"))) return;
   if (req.method !== "POST") return res.status(405).json({ error: "POST only" });
   const origin = req.headers.origin || "";
   if (ALLOWED.length && origin && !ALLOWED.some(a => origin === a)) return res.status(403).json({ error: "forbidden" });
