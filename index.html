@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Secrets of the World | Wow...Who Knew? | NuSparkLearnWow</title>
+<meta name="description" content="Surprising, source-checked secrets about nature, animals, Earth, the ocean, the universe, history, inventions and the human body. Every secret comes with its sources.">
+<meta property="og:title" content="The Secrets of the World: Wow...Who Knew?">
+<meta property="og:description" content="Open the Cabinet of Curiosities: surprising, source-checked secrets for the whole family, from NuSparkLearnWow.com.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf6ea; --paper2:#f3ead4; --ink:#1d2433; --muted:#5b6170;
+  --navy:#1f2a44; --gold:#c9962b; --gold2:#e8c06a;
+  --wood1:#6b3f22; --wood2:#8a5530; --wood3:#4a2a15;
+  --true:#1f8a4c; --partly:#c28a00; --busted:#c0392b;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#efe6cf url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:17px;line-height:1.55}
+a{color:var(--navy)}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* banner */
+.banner{display:flex;gap:6px;overflow:hidden;height:150px;background:var(--navy)}
+.banner figure{margin:0;flex:1 1 0;min-width:110px;position:relative;overflow:hidden;background:#2b3a5e}
+.banner img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .6s}
+.banner img.on{opacity:1}
+.banner figcaption{position:absolute;left:0;right:0;bottom:0;padding:4px 8px;font-size:12px;font-weight:800;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.65));letter-spacing:.3px}
+@media(max-width:700px){.banner{height:96px}.banner figure:nth-child(n+5){display:none}}
+
+/* masthead */
+.mast{background:var(--paper);border-bottom:4px double var(--ink);padding:14px 0 10px;text-align:center}
+.mast .kicker{font-weight:800;letter-spacing:3px;font-size:12px;color:var(--gold);text-transform:uppercase}
+.mast h1{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:clamp(34px,6vw,64px);margin:2px 0 0;line-height:1.05}
+.mast .sub{font-family:"Playfair Display",Georgia,serif;font-size:clamp(17px,2.4vw,22px);margin:4px 0 8px;font-style:italic}
+.mast .bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 4px;font-size:14px;font-weight:700}
+.toggle{display:inline-flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden}
+.toggle button{border:0;background:transparent;padding:6px 14px;font-weight:800;font-size:14px;color:var(--ink)}
+.toggle button.on{background:var(--ink);color:var(--paper)}
+
+/* sections */
+section.block{background:var(--paper);margin:18px auto;border-radius:var(--radius);box-shadow:0 2px 0 rgba(0,0,0,.06),0 10px 30px rgba(60,40,10,.08);padding:18px}
+.sec-title{font-family:"Playfair Display",Georgia,serif;font-size:26px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.sec-title small{font-family:Nunito,sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
+.rule{border:0;border-top:2px solid var(--ink);margin:6px 0 14px}
+.intro{color:var(--muted);margin:0 0 12px}
+
+/* cabinet */
+.cabinet{background:linear-gradient(180deg,var(--wood2),var(--wood1));border-radius:18px;padding:16px;border:6px solid var(--wood3);box-shadow:inset 0 0 0 3px rgba(255,255,255,.08),0 14px 30px rgba(40,20,5,.35)}
+.cab-top{text-align:center;color:var(--gold2);font-family:"Playfair Display",serif;font-weight:900;font-size:22px;margin:-4px 0 12px;text-shadow:0 2px 0 rgba(0,0,0,.35)}
+.drawers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:820px){.drawers{grid-template-columns:repeat(2,1fr)}}
+.drawer{position:relative;border:0;border-radius:10px;padding:16px 10px 14px;background:linear-gradient(180deg,#9a6238,#7a4826);box-shadow:inset 0 2px 0 rgba(255,255,255,.18),inset 0 -4px 0 rgba(0,0,0,.25),0 4px 0 var(--wood3);transition:transform .2s, box-shadow .2s;color:var(--ink)}
+.drawer:hover{transform:translateY(-2px)}
+.drawer.open{transform:translateY(6px) scale(1.02);box-shadow:inset 0 2px 0 rgba(255,255,255,.18),0 10px 18px rgba(0,0,0,.45);outline:3px solid var(--gold2)}
+.plate{display:block;background:var(--paper);border:2px solid var(--gold);border-radius:6px;padding:6px 8px;font-weight:800;font-size:15px}
+.plate .ic{font-size:26px;display:block;line-height:1.2}
+.handle{display:block;width:46%;height:10px;margin:10px auto 0;border-radius:999px;background:linear-gradient(180deg,var(--gold2),var(--gold));box-shadow:0 2px 0 rgba(0,0,0,.35)}
+
+/* edition */
+.edition-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+.edition-head h2{font-family:"Playfair Display",serif;font-size:30px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.more-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:18px}
+.btn-big{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:13px 26px;font-weight:800;font-size:17px;box-shadow:0 4px 0 #0e1527}
+.btn-big:active{transform:translateY(2px);box-shadow:0 2px 0 #0e1527}
+.btn-big[disabled]{opacity:.6;cursor:wait}
+.linkish{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:14px}
+
+/* card */
+.card{background:#fffdf7;border:1px solid #e3d7b8;border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(60,40,10,.07)}
+.card.featured{border:2px solid var(--ink)}
+.card-top{display:flex;justify-content:space-between;align-items:center;padding:10px 14px 0;gap:8px}
+.tag{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.stamp{font-weight:900;font-size:13px;letter-spacing:1px;border:2px solid currentColor;border-radius:6px;padding:2px 8px;transform:rotate(-2deg);white-space:nowrap}
+.v-true{color:var(--true)} .v-partly{color:var(--partly)} .v-busted{color:var(--busted)}
+.card h3{font-family:"Playfair Display",Georgia,serif;font-size:23px;line-height:1.2;margin:10px 14px 6px}
+.card .body{margin:0 14px 10px}
+.wow{display:inline-block;margin:0 14px 10px;font-family:"Playfair Display",serif;font-weight:900;color:var(--gold);font-size:15px;transform:rotate(-2deg)}
+.mvf{margin:4px 14px 10px;border:2px dashed #d9c9a0;border-radius:10px;overflow:hidden}
+.mvf div{padding:8px 10px}
+.mvf .m{background:#fff3f1}
+.mvf .f{background:#f2fbf5}
+.mvf b{font-weight:900;letter-spacing:1px}
+.live-note,.update-note{margin:0 14px 8px;font-size:13px;font-weight:700;color:var(--navy);background:#eef2fb;border-radius:8px;padding:6px 10px}
+.update-note{background:#fff6dc;color:#7a5600}
+
+/* photo */
+.photo{position:relative;background:#e9e2cf;margin:10px 14px 4px;border-radius:10px;overflow:hidden;aspect-ratio:4/3}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.featured .photo{aspect-ratio:auto;height:min(460px,56vw)}
+.photo .ph-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px;opacity:.5}
+.photo svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.dot{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--gold2);border:3px solid #fff;box-shadow:0 0 0 3px rgba(31,42,68,.8);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(31,42,68,.8)}50%{box-shadow:0 0 0 9px rgba(232,192,106,.25)}}
+.lbl{position:absolute;transform:translate(-50%,-50%);background:var(--navy);color:#fff;font-size:13px;font-weight:800;padding:5px 9px;border-radius:8px;max-width:58%;line-height:1.25;text-align:center;box-shadow:0 3px 8px rgba(0,0,0,.35)}
+.chips{position:absolute;left:8px;right:8px;bottom:8px;display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:rgba(31,42,68,.88);color:#fff;font-size:13px;font-weight:800;padding:5px 9px;border-radius:8px}
+.credit{margin:0 14px 8px;font-size:11px;color:var(--muted)}
+.credit a{color:var(--muted)}
+
+/* scale visual */
+.scale{margin:4px 14px 12px;background:#f6efdc;border-radius:10px;padding:10px 12px}
+.scale .t{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.srow{display:grid;grid-template-columns:42% 1fr;align-items:center;gap:8px;margin:5px 0;font-size:14px;font-weight:700}
+.sbar{height:20px;background:linear-gradient(90deg,var(--navy),#3d5590);border-radius:6px;position:relative;min-width:4px;transition:width 1s}
+.sbar span{position:absolute;left:100%;margin-left:6px;top:0;font-size:13px;white-space:nowrap;color:var(--ink)}
+.srow:nth-child(odd) .sbar{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+
+/* footnotes */
+.fn{margin:auto 14px 10px;padding:8px 0 0;border-top:1px solid #e3d7b8;font-size:13px}
+.fn .h{font-weight:900;font-size:12px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.fn ol{margin:4px 0 0;padding-left:20px}
+.fn li{margin:2px 0}
+
+/* actions */
+.actions{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;background:#f7f0de;border-top:1px solid #e3d7b8}
+.act{border:1.5px solid #cdbb8e;background:#fffdf7;border-radius:999px;padding:6px 11px;font-size:13.5px;font-weight:800;color:var(--ink)}
+.act:hover,.act.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.panel{padding:12px 14px 14px;background:#fffaf0;border-top:1px dashed #d9c9a0}
+.panel label,.panel .ex{display:block;font-size:13.5px;color:var(--muted);margin:6px 0 4px}
+.panel .ex{font-style:italic}
+.panel textarea,.panel input[type=text],.heard input{width:100%;border:2px solid #cdbb8e;border-radius:10px;padding:10px;font:inherit;background:#fff}
+.panel textarea{min-height:76px;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;align-items:center}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:8px 16px;font-weight:800;font-size:14.5px}
+.btn.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.starter{border:1.5px dashed #b9a06a;background:#fff;border-radius:999px;padding:5px 11px;font-size:13.5px;font-weight:700;color:var(--ink)}
+.result{margin-top:10px;background:#fff;border:1.5px solid #e3d7b8;border-radius:10px;padding:10px 12px}
+.result .rt{font-weight:900;margin-bottom:4px}
+.result ul{margin:4px 0;padding-left:20px}
+.loading{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--navy);margin-top:10px}
+.spin{width:20px;height:20px;border:3px solid #cdd5e8;border-top-color:var(--navy);border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.share-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.sh{border:0;border-radius:10px;padding:9px 13px;font-weight:800;font-size:14px;color:#fff}
+.sh.fb{background:#1877f2}.sh.x{background:#111}.sh.wa{background:#1fa855}.sh.em{background:#6b7280}.sh.cp{background:var(--gold);color:var(--ink)}.sh.nat{background:var(--navy)}.sh.pic{background:#8a5530}
+.copied{font-size:13px;font-weight:800;color:var(--true)}
+
+/* heard */
+section.block.heard{background:var(--navy);color:#fff}
+.heard .sec-title{color:#fff}
+.heard .intro{color:#cfd6e6}
+.heard-form{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:"Playfair Display",serif;font-size:24px;font-weight:900}
+.heard-form input{flex:1 1 260px;font-family:Nunito,sans-serif;font-size:18px;border-color:var(--gold2)}
+.heard .ex{color:var(--gold2);font-style:italic;font-size:14px;margin:0 0 8px}
+.heard-form .btn{background:var(--gold2);color:var(--ink);font-size:18px;padding:10px 22px}
+#heardOut .card{margin-top:14px;color:var(--ink)}
+.heard .notice{background:#fff;color:var(--ink);border-radius:10px;padding:12px;margin-top:12px}
+
+.cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin-top:12px;font-weight:800}
+footer{text-align:center;font-size:14px;color:var(--muted);padding:10px 16px 40px}
+footer .honest{font-weight:700;color:var(--ink)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="banner" id="banner" aria-hidden="true"></div>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="kicker">The Wow...Who Knew? Gazette</div>
+    <h1>The Secrets of the World</h1>
+    <p class="sub">Surprising, true, and always checked against real sources</p>
+    <div class="bar">
+      <span id="dateline"></span>
+      <span>Reading level:
+        <span class="toggle" role="group" aria-label="Reading level">
+          <button id="lvKids" type="button">Kids</button><button id="lvGrown" type="button">Grown-ups</button>
+        </span>
+      </span>
+      <a href="https://nusparklearnwow.com" target="_blank" rel="noopener">NuSparkLearnWow.com</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="block hidden" id="sharedBlock">
+    <h2 class="sec-title">📬 A secret someone shared with you</h2>
+    <hr class="rule">
+    <div id="sharedOut"></div>
+    <div class="cta"><span>Want more?</span><button class="btn-big" id="toCabinet" type="button">Open the Cabinet ↓</button></div>
+  </section>
+
+  <section class="block" id="dayBlock">
+    <h2 class="sec-title"><small>Front Page</small></h2>
+    <h2 class="sec-title" style="margin-top:-6px">⭐ Secret of the Day</h2>
+    <hr class="rule">
+    <div id="dayOut"></div>
+  </section>
+
+  <section class="block" id="cabinetBlock">
+    <h2 class="sec-title">🗄️ The Cabinet of Curiosities</h2>
+    <hr class="rule">
+    <p class="intro">Pick a drawer to open its edition. Every secret comes with its sources.</p>
+    <div class="cabinet">
+      <div class="cab-top">Wow...Who Knew?</div>
+      <div class="drawers" id="drawers"></div>
+    </div>
+  </section>
+
+  <section class="block hidden" id="editionBlock">
+    <div class="edition-head">
+      <h2 id="edTitle"></h2>
+      <button class="linkish" id="startOver" type="button">Start this drawer over</button>
+    </div>
+    <hr class="rule">
+    <div class="grid" id="edGrid"></div>
+    <div class="more-row">
+      <button class="btn-big" id="moreBtn" type="button">Show Me 3 More</button>
+    </div>
+    <div id="moreMsg" class="intro" style="text-align:center;margin-top:8px"></div>
+  </section>
+
+  <section class="block heard" id="heardBlock">
+    <h2 class="sec-title">🗞️ I Heard That... True?</h2>
+    <p class="intro">Heard something at school, at work or online? Mr. Paul will check it against real sources.</p>
+    <p class="ex">Try: "goldfish only remember things for 3 seconds" · "lightning never strikes the same place twice" · "bulls hate the color red"</p>
+    <form class="heard-form" id="heardForm" autocomplete="off">
+      <span>I heard that</span>
+      <input type="text" id="heardInput" maxlength="300" aria-label="I heard that...">
+      <button class="btn" type="submit" id="heardBtn">True?</button>
+    </form>
+    <div id="heardOut"></div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="honest">Every secret is checked against the sources shown. If something looks wrong, tap ⚖️ Challenge This and we'll dig deeper.</p>
+  <p>Photos from Wikipedia / Wikimedia Commons, credited on each photo. Answers are researched live with AI and real sources; it can still make mistakes, so the footnotes are always there for you to check.</p>
+  <p>The Secrets of the World is part of <a href="https://nusparklearnwow.com" target="_blank" rel="noopener">NuSparkLearnWow.com</a> from NuSpark Publishing.</p>
+</footer>
+
+<script>
+/* ========== SETTINGS (change these if needed) ========== */
+const CONFIG = {
+  shareBase: "",                      // leave "" to share this page's own address, or set e.g. "https://secrets.nusparklearnwow.com/"
+  siteName: "NuSparkLearnWow.com",
+  campaign: "secrets-of-the-world"    // shows up in your analytics as utm_campaign
+};
+/* ======================================================= */
+
+const $ = s => document.querySelector(s);
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+function el(tag, attrs, ...kids){
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})){
+    if (v == null || v === false) continue;
+    if (k === "class") n.className = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else if (k === "text") n.textContent = v;
+    else n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of kids.flat()){ if (c == null || c === false) continue; n.append(c.nodeType ? c : document.createTextNode(String(c))); }
+  return n;
+}
+function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+const state = {
+  data: null, level: store.get("sotw_level", "kids"),
+  seen: store.get("sotw_seen", {}), drawer: null, queue: [], shown: [],
+  liveHeads: store.get("sotw_live_heads", {}), updated: {}, heard: null, shared: null
+};
+const VERDICT = { true: ["✅ TRUE", "v-true"], partly: ["🟡 PARTLY TRUE", "v-partly"], busted: ["❌ BUSTED", "v-busted"] };
+const drawerInfo = id => (state.data.drawers.find(d => d.id === id) || { name: "Secrets", icon: "✨" });
+const textOf = s => (state.level === "grown" ? (s.grown || s.kids) : (s.kids || s.grown)) || "";
+
+/* ---------- API ---------- */
+async function api(path, body){
+  const r = await fetch(path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+  let j = {}; try { j = await r.json(); } catch(e){}
+  if (!r.ok) throw new Error(j.message || j.error || "Something went wrong. Please try again.");
+  return j;
+}
+function loadingEl(msg){ return el("div", { class: "loading" }, el("span", { class: "spin" }), msg || "Mr. Paul is checking the sources…"); }
+
+/* ---------- Photos (Wikipedia / Wikimedia Commons, free + credited) ---------- */
+const stripTags = h => { const d = document.createElement("div"); d.innerHTML = h || ""; return (d.textContent || "").replace(/\s+/g, " ").trim(); };
+const photoMem = {};
+async function wikiPhoto(title){
+  if (!title) return null;
+  if (photoMem[title]) return photoMem[title];
+  const cached = store.get("sotw_ph_" + title, null);
+  if (cached && cached.t > Date.now() - 7 * 864e5) return (photoMem[title] = cached.v);
+  const p = (async () => {
+    try {
+      const u = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=name&titles=" + encodeURIComponent(title);
+      const j = await (await fetch(u)).json();
+      const page = Object.values((j.query && j.query.pages) || {})[0];
+      const name = page && page.pageimage;
+      if (!name) return null;
+      // Only use images that live on Wikimedia Commons (freely licensed). Non-free images are skipped.
+      const c = "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=900&titles=" + encodeURIComponent("File:" + name);
+      const cj = await (await fetch(c)).json();
+      const cp = Object.values((cj.query && cj.query.pages) || {})[0];
+      if (!cp || cp.missing !== undefined || !cp.imageinfo) return null;
+      const ii = cp.imageinfo[0], md = ii.extmetadata || {};
+      const v = {
+        url: ii.thumburl || ii.url,
+        page: ii.descriptionurl,
+        artist: stripTags(md.Artist && md.Artist.value).slice(0, 80) || "Unknown",
+        license: stripTags(md.LicenseShortName && md.LicenseShortName.value) || "",
+        w: ii.thumbwidth, h: ii.thumbheight
+      };
+      store.set("sotw_ph_" + title, { t: Date.now(), v });
+      return v;
+    } catch(e){ return null; }
+  })();
+  photoMem[title] = p;
+  return p;
+}
+
+/* ---------- Arrows on photos ---------- */
+const annMem = {};
+async function annotate(photo, s){
+  const labels = (s.pointers || []).filter(Boolean);
+  if (!labels.length) return { points: [] };
+  const key = "sotw_an_" + photo.url + "|" + labels.join("|");
+  if (annMem[key]) return annMem[key];
+  const c = store.get(key, null);
+  if (c) return (annMem[key] = Promise.resolve(c));
+  annMem[key] = api("/api/annotate", { imageUrl: photo.url, labels, subject: s.headline })
+    .then(r => { store.set(key, r); return r; })
+    .catch(() => ({ points: [] }));
+  return annMem[key];
+}
+function drawPointers(frame, ann, labels){
+  frame.querySelectorAll(".dot,.lbl,.chips,svg").forEach(n => n.remove());
+  const good = (ann.points || []).filter(p => p.confidence >= 0.7);
+  const goodLabels = new Set(good.map(p => p.label));
+  const svgNS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("viewBox", "0 0 100 100"); svg.setAttribute("preserveAspectRatio", "none");
+  good.forEach((p, i) => {
+    let lx = p.x < 50 ? p.x + 24 : p.x - 24;
+    let ly = p.y < 35 ? p.y + 20 : p.y - 20;
+    ly += i * 6; lx = Math.max(22, Math.min(78, lx)); ly = Math.max(10, Math.min(88, ly));
+    const line = document.createElementNS(svgNS, "line");
+    line.setAttribute("x1", lx); line.setAttribute("y1", ly); line.setAttribute("x2", p.x); line.setAttribute("y2", p.y);
+    line.setAttribute("stroke", "#fff"); line.setAttribute("stroke-width", "3"); line.setAttribute("vector-effect", "non-scaling-stroke");
+    line.setAttribute("stroke-dasharray", "6 4");
+    svg.appendChild(line);
+    frame.append(el("div", { class: "dot", style: `left:${p.x}%;top:${p.y}%` }));
+    frame.append(el("div", { class: "lbl", style: `left:${lx}%;top:${ly}%`, text: p.label }));
+  });
+  frame.append(svg);
+  const rest = labels.filter(l => !goodLabels.has(l));
+  if (rest.length) frame.append(el("div", { class: "chips" }, rest.map(l => el("span", { class: "chip", text: "📌 " + l }))));
+}
+function photoBlock(s, withPointers = true){
+  const wrap = el("div", {});
+  const frame = el("div", { class: "photo" }, el("div", { class: "ph-empty", text: drawerInfo(s.drawer).icon }));
+  const credit = el("div", { class: "credit" });
+  wrap.append(frame, credit);
+  const title = s.photo && s.photo.wiki;
+  if (!title){ frame.remove(); return wrap; }
+  wikiPhoto(title).then(ph => {
+    if (!ph){ if (s.scale) frame.remove(); return; }
+    const img = el("img", { alt: s.headline, loading: "lazy", crossorigin: "anonymous", referrerpolicy: "no-referrer" });
+    img.src = ph.url;
+    img.onerror = () => { img.remove(); };
+    frame.querySelector(".ph-empty").replaceWith(img);
+    s._photo = ph;
+    credit.append("Photo: ", el("a", { href: ph.page, target: "_blank", rel: "noopener", text: ph.artist }), " / Wikimedia Commons" + (ph.license ? " (" + ph.license + ")" : ""));
+    if (withPointers && s.pointers && s.pointers.length){
+      drawPointers(frame, { points: [] }, s.pointers);       // labels show right away
+      annotate(ph, s).then(ann => { s._ann = ann; drawPointers(frame, ann, s.pointers); });
+    }
+  });
+  return wrap;
+}
+
+/* ---------- Scale visual ---------- */
+function scaleBlock(sc){
+  const max = Math.max(...sc.items.map(i => i.value));
+  const box = el("div", { class: "scale" }, el("div", { class: "t", text: sc.title }));
+  sc.items.forEach(i => {
+    const bar = el("div", { class: "sbar", style: "width:4px" }, el("span", { text: i.value.toLocaleString() }));
+    box.append(el("div", { class: "srow" }, el("div", { text: i.label }), el("div", { style: "padding-right:70px" }, bar)));
+    requestAnimationFrame(() => setTimeout(() => { bar.style.width = Math.max(4, (i.value / max) * 100) + "%"; }, 60));
+  });
+  return box;
+}
+
+/* ---------- Footnotes ---------- */
+function footnotes(sources){
+  if (!sources || !sources.length) return null;
+  return el("div", { class: "fn" }, el("div", { class: "h", text: "Sources" }),
+    el("ol", {}, sources.map(src => el("li", {}, el("a", { href: src.url, target: "_blank", rel: "noopener", text: src.title || src.url })))));
+}
+
+/* ---------- Card ---------- */
+function renderCard(s, opts = {}){
+  const cur = state.updated[s.id] || s;
+  const [vLabel, vClass] = VERDICT[cur.verdict] || VERDICT.true;
+  const d = drawerInfo(cur.drawer);
+  const card = el("article", { class: "card" + (opts.featured ? " featured" : "") });
+  card._secret = cur;
+  card.append(el("div", { class: "card-top" }, el("span", { class: "tag", text: cur.heard ? "🗞️ Rumor Check" : d.icon + " " + d.name }), el("span", { class: "stamp " + vClass, text: vLabel })));
+  if (cur._updatedNote) card.append(el("div", { class: "update-note", text: "🔄 Updated after a deeper check: " + cur._updatedNote }));
+  if (cur.live) card.append(el("div", { class: "live-note", text: "🔎 Freshly found and checked against the sources below" }));
+  card.append(photoBlock(cur));
+  card.append(el("h3", { text: cur.headline }));
+  if (cur.type === "myth"){
+    card.append(el("div", { class: "mvf" },
+      el("div", { class: "m" }, el("b", { text: "MYTH: " }), cur.claim || cur.headline),
+      el("div", { class: "f" }, el("b", { text: "THE REAL STORY: " }), textOf(cur))));
+  } else {
+    card.append(el("p", { class: "body", text: textOf(cur) }));
+    card.append(el("span", { class: "wow", text: "Wow...Who Knew?" }));
+  }
+  if (cur.scale) card.append(scaleBlock(cur.scale));
+  const fn = footnotes(cur.sources); if (fn) card.append(fn);
+  if (!opts.noActions) card.append(actionBar(card));
+  return card;
+}
+
+/* ---------- Card actions ---------- */
+function actionBar(card){
+  const panel = el("div", { class: "panel hidden" });
+  const bar = el("div", { class: "actions" });
+  const items = [
+    ["❓ Ask About This", askPanel],
+    ["⚖️ Challenge This", challengePanel],
+    ["👀 Another Set of AI Eyes", eyesPanel],
+    ["📤 Share", sharePanel]
+  ];
+  items.forEach(([label, fn]) => {
+    const b = el("button", { class: "act", type: "button", text: label });
+    b.addEventListener("click", () => {
+      const open = b.classList.contains("on");
+      bar.querySelectorAll(".act").forEach(x => x.classList.remove("on"));
+      if (open){ panel.classList.add("hidden"); panel.innerHTML = ""; return; }
+      b.classList.add("on"); panel.innerHTML = ""; panel.classList.remove("hidden");
+      fn(card, panel);
+    });
+    bar.append(b);
+  });
+  const frag = el("div", {}); frag.append(bar, panel);
+  return frag;
+}
+
+function resultBox(title, body, sources, verdict){
+  const box = el("div", { class: "result" });
+  const head = el("div", { class: "rt" });
+  if (verdict && VERDICT[verdict]) head.append(el("span", { class: "stamp " + VERDICT[verdict][1], text: VERDICT[verdict][0] }), " ");
+  head.append(title || "");
+  box.append(head);
+  if (body) box.append(el("p", { style: "margin:4px 0", text: body }));
+  const fn = footnotes(sources); if (fn){ fn.style.margin = "8px 0 0"; box.append(fn); }
+  return box;
+}
+
+function askPanel(card, panel){
+  const s = card._secret;
+  const starters = ["Why does this happen?", "How do scientists know this?", "Is there anything else like this?"];
+  const ta = el("textarea", { maxlength: 400, "aria-label": "Your question" });
+  const out = el("div", {});
+  const go = async q => {
+    q = (q || ta.value).trim(); if (!q) return ta.focus();
+    out.innerHTML = ""; out.append(loadingEl());
+    try {
+      const r = await api("/api/ask", { mode: "ask", level: state.level, question: q, secret: { headline: s.headline, text: textOf(s) } });
+      out.innerHTML = "";
+      out.append(resultBox(r.confirmed ? "Mr. Paul says:" : "Hmm…", r.answer, r.sources, r.confirmed && r.verdict !== "none" ? r.verdict : null));
+    } catch(e){ out.innerHTML = ""; out.append(resultBox("Hmm…", e.message)); }
+  };
+  panel.append(
+    el("label", { text: "Ask a question about this secret, or anything related:" }),
+    el("div", { class: "row" }, starters.map(t => el("button", { class: "starter", type: "button", text: t, onclick: () => { ta.value = t; go(t); } }))),
+    el("div", { class: "ex", text: 'For example: "How do bats sleep without falling?" or "Do other animals have more than one heart?"' }),
+    ta,
+    el("div", { class: "row" }, el("button", { class: "btn", type: "button", text: "Ask", onclick: () => go() })),
+    out
+  );
+}
+
+function challengePanel(card, panel){
+  const s = card._secret;
+  const ta = el("textarea", { maxlength: 500, "aria-label": "What makes you doubt it?" });
+  const out = el("div", {});
+  const btn = el("button", { class: "btn", type: "button", text: "⚖️ Run a deeper check" });
+  btn.onclick = async () => {
+    btn.disabled = true; out.innerHTML = ""; out.append(loadingEl("Mr. Paul is digging through more sources… this can take a little longer."));
+    try {
+      const r = await api("/api/ask", { mode: "challenge", level: state.level, reason: ta.value.trim(), secret: { headline: s.headline, text: textOf(s), verdict: s.verdict } });
+      out.innerHTML = "";
+      if (r.outcome === "updated"){
+        const upd = Object.assign({}, s, {
+          verdict: r.newVerdict && r.newVerdict !== "none" ? r.newVerdict : s.verdict,
+          kids: r.newText || s.kids, grown: r.newText || s.grown,
+          sources: mergeSources(r.sources, s.sources), _updatedNote: r.explanation
+        });
+        state.updated[s.id] = upd;
+        const fresh = renderCard(upd, { featured: card.classList.contains("featured") });
+        card.replaceWith(fresh);
+        return;
+      }
+      const titles = { stands: "✅ Verdict stands", disagree: "🟡 Experts disagree", unconfirmed: "🔎 Not enough new evidence" };
+      out.append(resultBox(titles[r.outcome] || "Result", r.explanation, r.sources));
+    } catch(e){ out.innerHTML = ""; out.append(resultBox("Hmm…", e.message)); }
+    btn.disabled = false;
+  };
+  panel.append(
+    el("label", { text: "Think this secret is wrong or missing something? Mr. Paul will re-check it with more and stronger sources." }),
+    el("div", { class: "ex", text: 'Optional: tell us why. For example: "My teacher said the opposite" or "I read a newer study."' }),
+    ta, el("div", { class: "row" }, btn), out
+  );
+}
+function mergeSources(a, b){
+  const out = [], seen = new Set();
+  [...(a || []), ...(b || [])].forEach(s => { if (s && s.url && !seen.has(s.url)){ seen.add(s.url); out.push(s); } });
+  return out.slice(0, 6);
+}
+
+function eyesPanel(card, panel){
+  const s = card._secret;
+  const prompt = `Please fact-check this for me. Tell me if anything is wrong, outdated or missing, and list the reliable sources you used.\n\n"${s.headline}"\n${s.type === "myth" ? "Myth: " + (s.claim || "") + "\nThe real story: " : ""}${textOf(s)}`;
+  const pre = el("textarea", { readonly: true, "aria-label": "Prompt to copy" }); pre.value = prompt;
+  const ok = el("span", { class: "copied" });
+  const paste = el("textarea", { maxlength: 4000, "aria-label": "Paste the other AI's answer here" });
+  const out = el("div", {});
+  const cmp = el("button", { class: "btn", type: "button", text: "Compare the answers" });
+  cmp.onclick = async () => {
+    if (!paste.value.trim()) return paste.focus();
+    cmp.disabled = true; out.innerHTML = ""; out.append(loadingEl("Mr. Paul is comparing the two answers…"));
+    try {
+      const r = await api("/api/ask", { mode: "compare", level: state.level, other: paste.value.trim(), secret: { headline: s.headline, text: textOf(s) } });
+      out.innerHTML = "";
+      const titles = { matches: "✅ Both answers agree", partly: "🟡 Mostly agree, with some differences", differs: "⚠️ The answers disagree" };
+      const box = resultBox(titles[r.agreement] || "Comparison", r.summary, r.sources);
+      if (r.differences && r.differences.length) box.insertBefore(el("ul", {}, r.differences.map(d => el("li", { text: d }))), box.querySelector(".fn"));
+      out.append(box);
+    } catch(e){ out.innerHTML = ""; out.append(resultBox("Hmm…", e.message)); }
+    cmp.disabled = false;
+  };
+  panel.append(
+    el("label", { text: "Step 1: Copy this and paste it into your favorite AI assistant (ChatGPT, Gemini or another)." }),
+    pre,
+    el("div", { class: "row" },
+      el("button", { class: "btn", type: "button", text: "📋 Copy", onclick: () => copyText(prompt, ok) }),
+      el("a", { class: "btn alt", href: "https://chatgpt.com/", target: "_blank", rel: "noopener", style: "text-decoration:none", text: "Open ChatGPT" }),
+      el("a", { class: "btn alt", href: "https://gemini.google.com/", target: "_blank", rel: "noopener", style: "text-decoration:none", text: "Open Gemini" }), ok),
+    el("label", { text: "Step 2: Paste its answer here, and Mr. Paul will compare the two:" }),
+    paste, el("div", { class: "row" }, cmp), out
+  );
+}
+
+/* ---------- Sharing ---------- */
+function shareUrl(s, source){
+  const base = CONFIG.shareBase || (location.origin + location.pathname);
+  const u = new URL(base);
+  if (s.live || s.heard) u.searchParams.set("d", s.drawer || "nature"); else u.searchParams.set("s", s.id);
+  u.searchParams.set("utm_source", source); u.searchParams.set("utm_medium", "share"); u.searchParams.set("utm_campaign", CONFIG.campaign);
+  return u.toString();
+}
+function shareText(s){
+  if (s.type === "myth" || s.heard){
+    const v = { true: "TRUE ✅", partly: "PARTLY TRUE 🟡", busted: "BUSTED ❌" }[s.verdict] || "";
+    return `I checked it: ${v} "${s.claim || s.headline}" Check your own rumors at ${CONFIG.siteName}`;
+  }
+  return `Wow...Who Knew? 🤯 ${s.headline}! Discover more secrets at ${CONFIG.siteName}`;
+}
+function copyText(t, okEl){
+  const done = () => { if (okEl){ okEl.textContent = "Copied!"; setTimeout(() => okEl.textContent = "", 2000); } };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, () => fallbackCopy(t, done)); else fallbackCopy(t, done);
+}
+function fallbackCopy(t, done){ const ta = el("textarea", {}); ta.value = t; document.body.append(ta); ta.select(); try{ document.execCommand("copy"); }catch(e){} ta.remove(); done(); }
+
+function sharePanel(card, panel){
+  const s = card._secret;
+  const text = shareText(s);
+  const ok = el("span", { class: "copied" });
+  const open = (src, href) => window.open(href, "_blank", "noopener,width=640,height=560");
+  const grid = el("div", { class: "share-grid" });
+  if (navigator.share){
+    grid.append(el("button", { class: "sh nat", type: "button", text: "📱 Share…", onclick: () => navigator.share({ title: "Wow...Who Knew?", text, url: shareUrl(s, "device") }).catch(() => {}) }));
+  }
+  grid.append(
+    el("button", { class: "sh fb", type: "button", text: "Facebook", onclick: () => open("facebook", "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl(s, "facebook"))) }),
+    el("button", { class: "sh x", type: "button", text: "X", onclick: () => open("x", "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(shareUrl(s, "x"))) }),
+    el("button", { class: "sh wa", type: "button", text: "WhatsApp", onclick: () => open("whatsapp", "https://wa.me/?text=" + encodeURIComponent(text + " " + shareUrl(s, "whatsapp"))) }),
+    el("button", { class: "sh em", type: "button", text: "Email", onclick: () => { location.href = "mailto:?subject=" + encodeURIComponent("Wow...Who Knew? " + s.headline) + "&body=" + encodeURIComponent(text + "\n\n" + shareUrl(s, "email")); } }),
+    el("button", { class: "sh cp", type: "button", text: "🔗 Copy Link", onclick: () => copyText(text + " " + shareUrl(s, "copylink"), ok) }),
+    el("button", { class: "sh pic", type: "button", text: "🖼️ Save as Picture", onclick: () => savePicture(s, ok) }),
+    ok
+  );
+  panel.append(el("label", { text: "Share this secret with friends and family:" }), grid,
+    el("div", { class: "ex", text: "Tip: \"Save as Picture\" makes a ready-to-post image for Instagram and Facebook, with the website printed on it." }));
+}
+
+function wrapLines(ctx, text, maxW){
+  const words = String(text).split(/\s+/), lines = []; let line = "";
+  for (const w of words){ const t = line ? line + " " + w : w; if (ctx.measureText(t).width > maxW && line){ lines.push(line); line = w; } else line = t; }
+  if (line) lines.push(line); return lines;
+}
+async function savePicture(s, okEl){
+  const W = 1080, H = 1080, c = document.createElement("canvas"); c.width = W; c.height = H;
+  const x = c.getContext("2d");
+  x.fillStyle = "#fbf6ea"; x.fillRect(0, 0, W, H);
+  x.fillStyle = "#1f2a44"; x.fillRect(0, 0, W, 120);
+  x.fillStyle = "#e8c06a"; x.font = "900 54px 'Playfair Display', Georgia, serif"; x.textAlign = "center"; x.fillText("Wow...Who Knew?", W / 2, 66);
+  x.fillStyle = "#ffffff"; x.font = "700 24px Nunito, sans-serif"; x.fillText("THE SECRETS OF THE WORLD", W / 2, 102);
+  const top = 140, ph = 500, side = 60;
+  let drewPhoto = false;
+  if (s._photo){
+    try {
+      const img = await new Promise((res, rej) => { const i = new Image(); i.crossOrigin = "anonymous"; i.onload = () => res(i); i.onerror = rej; i.src = s._photo.url; });
+      const bw = W - side * 2, r = Math.max(bw / img.width, ph / img.height);
+      const sw = bw / r, sh = ph / r, sx = (img.width - sw) / 2, sy = (img.height - sh) / 2;
+      x.save(); x.beginPath(); x.roundRect ? x.roundRect(side, top, bw, ph, 24) : x.rect(side, top, bw, ph); x.clip();
+      x.drawImage(img, sx, sy, sw, sh, side, top, bw, ph); x.restore();
+      drewPhoto = true;
+      const good = ((s._ann && s._ann.points) || []).filter(p => p.confidence >= 0.7);
+      good.forEach(p => {
+        // map photo percentage to the cropped canvas area
+        const px = side + ((p.x / 100) * img.width - sx) * r, py = top + ((p.y / 100) * img.height - sy) * r;
+        if (px < side || px > W - side || py < top || py > top + ph) return;
+        x.beginPath(); x.arc(px, py, 16, 0, Math.PI * 2); x.fillStyle = "#e8c06a"; x.fill(); x.lineWidth = 6; x.strokeStyle = "#ffffff"; x.stroke();
+        x.font = "800 28px Nunito, sans-serif"; const tw = Math.min(x.measureText(p.label).width, 520);
+        const lx = Math.max(side + 20, Math.min(W - side - tw - 40, px < W / 2 ? px + 40 : px - tw - 60)), ly = Math.max(top + 20, Math.min(top + ph - 64, py - 26));
+        x.fillStyle = "rgba(31,42,68,.92)"; x.fillRect(lx, ly, tw + 30, 50); x.fillStyle = "#fff"; x.textAlign = "left"; x.fillText(p.label, lx + 15, ly + 35, 520);
+      });
+    } catch(e){ drewPhoto = false; }
+  }
+  if (!drewPhoto){
+    x.fillStyle = "#efe4c8"; x.fillRect(side, top, W - side * 2, ph);
+    x.font = "200px serif"; x.textAlign = "center"; x.fillText(drawerInfo(s.drawer).icon, W / 2, top + ph / 2 + 70);
+  }
+  const v = VERDICT[s.verdict];
+  let y = top + ph + 60;
+  if (s.type === "myth" && v){
+    x.textAlign = "left"; x.font = "900 34px Nunito, sans-serif"; x.fillStyle = { "v-true": "#1f8a4c", "v-partly": "#c28a00", "v-busted": "#c0392b" }[v[1]];
+    x.fillText(v[0], side, y); y += 50;
+  }
+  x.textAlign = "left"; x.fillStyle = "#1d2433"; x.font = "900 50px 'Playfair Display', Georgia, serif";
+  wrapLines(x, s.headline, W - side * 2).slice(0, 3).forEach(l => { x.fillText(l, side, y); y += 60; });
+  x.font = "600 30px Nunito, sans-serif"; x.fillStyle = "#3a4152";
+  const body = textOf(s); const lines = wrapLines(x, body, W - side * 2);
+  const room = Math.max(0, Math.floor((990 - y) / 40));
+  lines.slice(0, room).forEach((l, i) => { const last = i === room - 1 && lines.length > room; x.fillText(last ? l.replace(/\s*\S*$/, "…") : l, side, y); y += 40; });
+  x.fillStyle = "#1f2a44"; x.fillRect(0, H - 70, W, 70);
+  x.fillStyle = "#e8c06a"; x.font = "900 34px Nunito, sans-serif"; x.textAlign = "center"; x.fillText(CONFIG.siteName, W / 2, H - 24);
+  if (drewPhoto && s._photo){ x.fillStyle = "#6b7280"; x.font = "600 18px Nunito, sans-serif"; x.textAlign = "right"; x.fillText(("Photo: " + s._photo.artist + " / Wikimedia Commons " + (s._photo.license ? "(" + s._photo.license + ")" : "")).slice(0, 90), W - side, H - 82); }
+  try {
+    c.toBlob(b => {
+      const a = el("a", { download: "wow-who-knew-secret.png" }); a.href = URL.createObjectURL(b);
+      document.body.append(a); a.click(); a.remove();
+      if (okEl){ okEl.textContent = "Picture saved!"; setTimeout(() => okEl.textContent = "", 2500); }
+    }, "image/png");
+  } catch(e){ if (okEl) okEl.textContent = "Sorry, that photo can't be saved. Try Copy Link instead."; }
+}
+
+/* ---------- Drawers & editions ---------- */
+function renderDrawers(){
+  const box = $("#drawers"); box.innerHTML = "";
+  state.data.drawers.forEach(d => {
+    box.append(el("button", { class: "drawer" + (state.drawer === d.id ? " open" : ""), type: "button", "aria-label": "Open the " + d.name + " drawer", onclick: () => openDrawer(d.id, true) },
+      el("span", { class: "plate" }, el("span", { class: "ic", text: d.icon }), d.name), el("span", { class: "handle" })));
+  });
+}
+function openDrawer(id, scroll){
+  state.drawer = id; state.shown = [];
+  const unseen = state.data.secrets.filter(s => s.drawer === id && !state.seen[s.id]);
+  state.queue = shuffle(unseen);
+  renderDrawers();
+  const d = drawerInfo(id);
+  $("#edTitle").textContent = d.icon + " The " + d.name + " Edition";
+  $("#edGrid").innerHTML = ""; $("#moreMsg").textContent = "";
+  $("#editionBlock").classList.remove("hidden");
+  dealMore();
+  if (scroll) $("#editionBlock").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+function updateMoreBtn(){
+  const b = $("#moreBtn");
+  b.textContent = state.queue.length ? "Show Me 3 More" : "Show Me 3 More (fresh from the sources)";
+}
+async function dealMore(){
+  const grid = $("#edGrid"), msg = $("#moreMsg"), btn = $("#moreBtn");
+  if (state.queue.length){
+    const batch = state.queue.splice(0, 3);
+    batch.forEach(s => { state.seen[s.id] = 1; state.shown.push(s); grid.append(renderCard(s)); });
+    store.set("sotw_seen", state.seen);
+    msg.textContent = state.queue.length ? "" : "You've seen every built-in secret in this drawer! Tap again and Mr. Paul will find brand-new ones, checked against real sources.";
+    updateMoreBtn();
+    return;
+  }
+  btn.disabled = true; msg.innerHTML = ""; msg.append(loadingEl("Mr. Paul is finding 3 brand-new secrets and checking every one…"));
+  try {
+    const bank = state.data.secrets.filter(s => s.drawer === state.drawer).map(s => s.headline);
+    const prev = state.liveHeads[state.drawer] || [];
+    const r = await api("/api/ask", { mode: "more", level: state.level, drawer: state.drawer, exclude: [...bank, ...prev, ...state.shown.map(s => s.headline)] });
+    msg.textContent = "";
+    if (!r.secrets || !r.secrets.length){ msg.textContent = "Mr. Paul couldn't confirm any new secrets with strong enough sources this time, so he won't guess. Please try again."; }
+    (r.secrets || []).forEach(s => { state.shown.push(s); grid.append(renderCard(s)); });
+    state.liveHeads[state.drawer] = [...prev, ...(r.secrets || []).map(s => s.headline)].slice(-80);
+    store.set("sotw_live_heads", state.liveHeads);
+  } catch(e){ msg.textContent = e.message; }
+  btn.disabled = false; updateMoreBtn();
+}
+
+/* ---------- I Heard That ---------- */
+async function checkHeard(ev){
+  ev.preventDefault();
+  const claim = $("#heardInput").value.trim(); if (!claim) return $("#heardInput").focus();
+  const out = $("#heardOut"), btn = $("#heardBtn");
+  btn.disabled = true; out.innerHTML = ""; const ld = loadingEl("Mr. Paul is checking that rumor against real sources…"); ld.style.color = "#fff"; out.append(ld);
+  try {
+    const r = await api("/api/ask", { mode: "heard", level: state.level, claim });
+    out.innerHTML = "";
+    if (!r.confirmed){
+      out.append(el("div", { class: "notice" }, el("b", { text: "🔎 Not confirmed. " }), r.answer, footnotes(r.sources) || ""));
+    } else {
+      state.heard = { id: "heard", heard: true, type: "myth", drawer: "nature", verdict: r.verdict, headline: r.headline || ("Is it true that " + claim + "?"),
+        claim: "I heard that " + claim, kids: r.answer, grown: r.answer, photo: r.wiki ? { wiki: r.wiki } : null, pointers: r.pointers || [], sources: r.sources };
+      out.append(renderCard(state.heard, { featured: true }));
+    }
+  } catch(e){ out.innerHTML = ""; out.append(el("div", { class: "notice", text: e.message })); }
+  btn.disabled = false;
+}
+
+/* ---------- Secret of the Day, level switch, startup ---------- */
+function renderDay(){
+  const list = state.data.secrets;
+  const day = Math.floor((Date.now() - new Date().getTimezoneOffset() * 6e4) / 864e5);
+  const s = list[day % list.length];
+  $("#dayOut").innerHTML = ""; $("#dayOut").append(renderCard(s, { featured: true }));
+}
+function setLevel(lv){
+  state.level = lv; store.set("sotw_level", lv);
+  $("#lvKids").classList.toggle("on", lv === "kids"); $("#lvGrown").classList.toggle("on", lv === "grown");
+  if (!state.data) return;
+  renderDay();
+  if (state.shared){ $("#sharedOut").innerHTML = ""; $("#sharedOut").append(renderCard(state.shared, { featured: true })); }
+  if (state.drawer){ const g = $("#edGrid"); g.innerHTML = ""; state.shown.forEach(s => g.append(renderCard(s))); }
+}
+async function banner(){
+  const picks = [["Monarch butterfly", "Animals"], ["Lightning", "Nature"], ["Coral reef", "Ocean"], ["Milky Way", "Universe"], ["Great Pyramid of Giza", "History"], ["Grand Canyon", "Earth"], ["Incandescent light bulb", "Inventions"], ["Human brain", "Human Body"]];
+  const b = $("#banner");
+  picks.forEach(([t, cap]) => {
+    const img = el("img", { alt: "", crossorigin: "anonymous", referrerpolicy: "no-referrer" });
+    const fig = el("figure", {}, img, el("figcaption", { text: cap }));
+    b.append(fig);
+    wikiPhoto(t).then(ph => { if (ph){ img.onload = () => img.classList.add("on"); img.src = ph.url; } });
+  });
+}
+
+(async function start(){
+  $("#dateline").textContent = new Date().toLocaleDateString(undefined, { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  $("#lvKids").onclick = () => setLevel("kids"); $("#lvGrown").onclick = () => setLevel("grown");
+  setLevel(state.level);
+  banner();
+  try {
+    state.data = await (await fetch("secrets.json", { cache: "no-cache" })).json();
+  } catch(e){
+    $("#dayOut").textContent = "The secrets couldn't load. Please refresh the page."; return;
+  }
+  renderDrawers(); renderDay();
+  $("#moreBtn").onclick = dealMore;
+  $("#startOver").onclick = () => {
+    state.data.secrets.filter(s => s.drawer === state.drawer).forEach(s => delete state.seen[s.id]);
+    store.set("sotw_seen", state.seen); openDrawer(state.drawer, false);
+  };
+  $("#heardForm").addEventListener("submit", checkHeard);
+  $("#toCabinet").onclick = () => $("#cabinetBlock").scrollIntoView({ behavior: "smooth" });
+  const q = new URLSearchParams(location.search);
+  const sid = q.get("s"), did = q.get("d");
+  if (sid){
+    const s = state.data.secrets.find(x => x.id === sid);
+    if (s){ state.shared = s; $("#sharedBlock").classList.remove("hidden"); $("#sharedOut").append(renderCard(s, { featured: true })); }
+  }
+  if (did && state.data.drawers.some(d => d.id === did)) openDrawer(did, !sid);
+})();
+</script>
+</body>
+</html>
