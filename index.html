@@ -318,8 +318,11 @@ async function api(path, body){
   const r = await fetch(path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
   let j = {}; try { j = await r.json(); } catch(e){}
   if (!r.ok) throw new Error(j.message || j.error || "Something went wrong. Please try again.");
-  return j;
+  return cleanAI(j);
 }
+// Strip citation tags or stray markup the AI sometimes writes into its text, everywhere in a response.
+const cleanAI = v => typeof v === "string" ? v.replace(/<\/?cite\b[^>]*>/gi, "").replace(/<\/?[a-z_]+:[a-z_]+\b[^>]*>/gi, "").replace(/\*\*/g, "").replace(/[ \t]{2,}/g, " ").trim()
+  : Array.isArray(v) ? v.map(cleanAI) : (v && typeof v === "object") ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, cleanAI(x)])) : v;
 function loadingEl(msg){ return el("div", { class: "loading" }, el("span", { class: "spin" }), msg || "Mr. Paul is checking the sources…"); }
 
 /* ---------- Photos (Wikipedia / Wikimedia Commons, free + credited) ---------- */
