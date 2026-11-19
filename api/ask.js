@@ -19,6 +19,28 @@ const DRAWERS = {
   body: "Human Body"
 };
 
+// Directions ("angles") keep fresh secrets coming forever. The page shows these as chips; "Surprise me" picks one at random.
+const ANGLES = {
+  nature: ["Plants & flowers", "Trees & forests", "Weather & storms", "Fungi & mushrooms", "Seasons & light", "Strange natural wonders"],
+  animals: ["Insects & bugs", "Birds", "Pets & farm animals", "Animal superpowers", "Record breakers", "Animal myths"],
+  earth: ["Volcanoes & earthquakes", "Rocks, gems & crystals", "Deserts & ice", "Rivers & lakes", "Earth long ago", "Maps & places"],
+  ocean: ["Deep-sea creatures", "Coral reefs", "Whales & dolphins", "Waves, tides & currents", "Shipwrecks & exploring", "Ocean myths"],
+  universe: ["Planets & moons", "Stars & the Sun", "Astronauts & missions", "Black holes & galaxies", "Life in space", "Space myths"],
+  history: ["Ancient worlds", "Everyday life long ago", "Famous mix-ups", "Food history", "Inventors & explorers", "History myths"],
+  tech: ["Everyday objects", "Cars, trains & planes", "Phones & computers", "Accidental inventions", "Home & kitchen", "Why is it built that way?"],
+  body: ["Brain & senses", "Bones & muscles", "Heart & blood", "Sleep & dreams", "Food & digestion", "Body myths"]
+};
+const normHead = t => String(t || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(w => w.length > 3);
+function tooSimilar(head, excluded) {
+  const a = new Set(normHead(head)); if (a.size < 2) return false;
+  for (const e of excluded) {
+    const b = normHead(e); if (!b.length) continue;
+    let hit = 0; for (const w of b) if (a.has(w)) hit++;
+    if (hit / Math.min(a.size, b.length) >= 0.7) return true;
+  }
+  return false;
+}
+
 // --- simple per-IP daily limit (resets when the server instance restarts; your Anthropic spend cap is the real backstop)
 const hits = new Map();
 function overLimit(ip, limit) {
@@ -59,8 +81,12 @@ function modePrompt(mode, b, level) {
   const sourcesShape = `"sources": [{"title": "Publisher: page title", "url": "https://..."}]`;
   if (mode === "more") {
     const drawer = DRAWERS[b.drawer] ? b.drawer : "nature";
-    const avoid = (b.exclude || []).slice(0, 80).map(s => "- " + String(s).slice(0, 140)).join("\n");
+    // newest first: the client sends oldest -> newest, so keep the LAST 150
+    const avoid = (b.exclude || []).slice(-150).reverse().map(s => "- " + String(s).slice(0, 100)).join("\n");
+    const list = ANGLES[drawer];
+    const angle = list.includes(b.angle) ? b.angle : list[Math.floor(Math.random() * list.length)];
     return `Find 3 NEW, surprising, TRUE "I didn't know that!" secrets for the drawer: ${DRAWERS[drawer]}.
+Focus this batch on: ${angle}. Go beyond the most famous trivia everyone already knows; look for lesser-known facts that are still well documented.
 They must be well established and confirmed by at least one strong source each (two is better). Mix it up: mostly true surprising facts, and at most one common myth that you correct.
 Do NOT repeat any of these already-shown secrets:
 ${avoid || "- (none)"}
@@ -249,6 +275,10 @@ module.exports = async (req, res) => {
   const b = req.body || {};
   const mode = String(b.mode || "");
   const level = b.level === "grown" ? "grown" : "kids";
+  if (mode === "more") {
+    const list = ANGLES[DRAWERS[b.drawer] ? b.drawer : "nature"];
+    if (!list.includes(b.angle)) b.angle = list[Math.floor(Math.random() * list.length)];
+  }
   const prompt = modePrompt(mode, b, level);
   if (!prompt) return res.status(400).json({ error: "Unknown mode" });
 
@@ -262,6 +292,7 @@ module.exports = async (req, res) => {
       for (const s of Array.isArray(j.secrets) ? j.secrets : []) {
         const sources = verifySources(s.sources, retrieved);
         if (!sources.length) continue; // honesty rule: no verified source, no secret
+        if (tooSimilar(s.headline, b.exclude || [])) continue; // never repeat what this visitor has seen
         const verdict = okVerdict(s.verdict) === "none" ? "true" : s.verdict;
         secrets.push({
           id: "live-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7),
@@ -278,7 +309,7 @@ module.exports = async (req, res) => {
           sources
         });
       }
-      return res.status(200).json({ secrets: secrets.slice(0, 3), _diag: { pagesRead: retrieved.size, found: (Array.isArray(j.secrets) ? j.secrets.length : 0), kept: secrets.length } });
+      return res.status(200).json({ secrets: secrets.slice(0, 3), angle: b.angle, _diag: { pagesRead: retrieved.size, found: (Array.isArray(j.secrets) ? j.secrets.length : 0), kept: secrets.length } });
     }
 
     const sources = verifySources(j.sources, retrieved);
