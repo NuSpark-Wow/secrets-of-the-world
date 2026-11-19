@@ -56,7 +56,7 @@ const SYSTEM = `You are the fact-checking editor of "The Secrets of the World," 
 
 ABSOLUTE HONESTY RULES:
 1. ALWAYS use the web_search tool before answering. Answer ONLY from what the search results support. Never answer from memory alone.
-2. Prefer strong sources: government science agencies (NASA, NOAA, USGS, NIH, CDC), universities, museums (Smithsonian, AMNH), encyclopedias (Britannica), peer-reviewed research, and established science outlets. Avoid forums, social media, content farms, and "fun fact" list sites.
+2. Use ONLY strong sources (weaker sites are automatically removed, so don't rely on them): government science agencies (NASA, NOAA, USGS, NIH, CDC), universities, museums (Smithsonian, AMNH), encyclopedias (Britannica), peer-reviewed research, and established science outlets. Avoid forums, social media, content farms, and "fun fact" list sites.
 3. If reliable sources are weak, missing, or disagree, say so honestly: set "confirmed" to false, or use the "partly" verdict, or say experts disagree. Never force a yes/no.
 4. Every source you list MUST be a URL that appeared in your search results in this conversation. Never invent or guess URLs.
 5. Never make anything up. No invented numbers, quotes, names or dates.
@@ -157,6 +157,21 @@ function normUrl(u) {
 }
 function hostOf(u) { try { return new URL(String(u).trim()).hostname.replace(/^www\./, "").toLowerCase(); } catch (e) { return ""; } }
 const words = t => new Set(String(t || "").toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 3));
+// ---------- strong-source filter: only trusted science / education / reference sites make it into footnotes
+const STRONG_SUFFIX = [".edu", ".gov", ".mil", ".int", ".ac.uk", ".gov.uk", ".edu.au", ".gov.au", ".ac.nz", ".govt.nz", ".gc.ca", ".museum", ".si.edu"];
+const STRONG_HOSTS = ["sciencebuddies.org","scientificamerican.com","britannica.com","nationalgeographic.com","smithsonianmag.com","amnh.org","fi.edu","exploratorium.edu",
+  "nature.com","science.org","sciencedirect.com","springer.com","link.springer.com","wiley.com","onlinelibrary.wiley.com","frontiersin.org","plos.org","journals.plos.org","arxiv.org","pnas.org","cell.com","royalsocietypublishing.org","annualreviews.org","tandfonline.com","sagepub.com","jstor.org",
+  "aip.org","aps.org","physics.aps.org","iop.org","physicsworld.com","rsc.org","acs.org","pubs.acs.org","libretexts.org","openstax.org","khanacademy.org","ck12.org","physicsclassroom.com","hyperphysics.phy-astr.gsu.edu",
+  "livescience.com","space.com","newscientist.com","sciencenews.org","snexplores.org","sciencedaily.com","quantamagazine.org","popsci.com","discovermagazine.com","howstuffworks.com",
+  "bbc.co.uk","bbc.com","pbs.org","npr.org","wikipedia.org","en.wikipedia.org","letstalkscience.ca","scienceworld.ca","sciencemuseum.org.uk","nhm.ac.uk","nobelprize.org","sciencelearn.org.nz","apa.org","psychologytoday.com","simplypsychology.org",
+  "mayoclinic.org","clevelandclinic.org","hopkinsmedicine.org","aao.org","who.int","webmd.com","healthline.com","kidshealth.org","nationalacademies.org","ieee.org","spectrum.ieee.org","asme.org","asce.org","energy.gov",
+  "worldwildlife.org","nwf.org","audubon.org","oceanexplorer.noaa.gov","mbari.org","whoi.edu","metmuseum.org","history.com","loc.gov","archives.gov","nps.gov","usgs.gov","weather.gov","earthobservatory.nasa.gov","nasa.gov","noaa.gov","nih.gov","cdc.gov",
+  "jpl.nasa.gov","esa.int","keckobservatory.org","planetary.org","skyandtelescope.org","astronomy.com","nationalgeographic.org","kids.nationalgeographic.com","sciencefriday.com","stevespanglerscience.com","mofad.org","ifl.science","iflscience.com","sciencenotes.org","thoughtco.com","theconversation.com","theguardian.com","nytimes.com","washingtonpost.com","reuters.com","apnews.com","time.com","smithsonian.com","ocean.si.edu","nationalzoo.si.edu","airandspace.si.edu","naturalhistory.si.edu","ucsb.edu","scienceline.ucsb.edu"];
+function isStrong(url) {
+  const h = hostOf(url); if (!h) return false;
+  if (STRONG_SUFFIX.some(sfx => h.endsWith(sfx))) return true;
+  return STRONG_HOSTS.some(d => h === d || h.endsWith("." + d));
+}
 // A source counts only if it is a page Claude actually retrieved in THIS request.
 // Exact page match first. If Claude wrote the link slightly differently, we swap in the real
 // retrieved page from the same website (best title match), so every link shown is a page that was really read.
@@ -180,6 +195,8 @@ function verifySources(list, retrieved) {
       r = best;
     }
     if (!r) continue;
+    if (!isStrong(r.url)) continue; // weak sites (calculators, blogs, comment links) never make the footnotes
+    if (/[?&]comment/i.test(r.url)) continue;
     const n = normUrl(r.url);
     if (seen.has(n)) continue;
     seen.add(n);
