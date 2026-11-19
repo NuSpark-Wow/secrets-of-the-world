@@ -97,6 +97,12 @@ section.block{background:var(--paper);margin:18px auto;border-radius:var(--radiu
 .edition-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
 .edition-head h2{font-family:"Playfair Display",serif;font-size:30px;margin:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.ideas{margin-top:18px;text-align:center}
+.ideas-lab{font-weight:800;margin:0 0 8px;color:var(--navy)}
+.idea-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.idea-chip{background:#fff;border:2px solid var(--navy);color:var(--navy);border-radius:999px;padding:7px 14px;font-weight:700;font-size:14px;cursor:pointer}
+.idea-chip:hover,.idea-chip.on{background:var(--navy);color:#fff}
+.idea-chip:disabled{opacity:.5;cursor:default}
 .more-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:18px}
 .btn-big{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:13px 26px;font-weight:800;font-size:17px;box-shadow:0 4px 0 #0e1527}
 .btn-big:active{transform:translateY(2px);box-shadow:0 2px 0 #0e1527}
@@ -244,6 +250,10 @@ footer .honest{font-weight:700;color:var(--ink)}
       <button class="btn-big" id="moreBtn" type="button">Show Me 3 More</button>
     </div>
     <div id="moreMsg" class="intro" style="text-align:center;margin-top:8px"></div>
+    <div class="ideas" id="ideasRow">
+      <p class="ideas-lab">💡 Suggest New Ideas: point Mr. Paul in a direction</p>
+      <div class="idea-chips" id="ideaChips"></div>
+    </div>
   </section>
 
   <section class="block heard" id="heardBlock">
@@ -706,9 +716,27 @@ function openDrawer(id, scroll){
   $("#edTitle").textContent = d.icon + " The " + d.name + " Drawer";
   $("#edGrid").innerHTML = ""; $("#moreMsg").textContent = "";
   $("#editionBlock").classList.remove("hidden");
+  renderChips();
   dealMore();
   if (scroll) $("#editionBlock").scrollIntoView({ behavior: "smooth", block: "start" });
 }
+const ANGLES = {
+  nature: ["Plants & flowers", "Trees & forests", "Weather & storms", "Fungi & mushrooms", "Seasons & light", "Strange natural wonders"],
+  animals: ["Insects & bugs", "Birds", "Pets & farm animals", "Animal superpowers", "Record breakers", "Animal myths"],
+  earth: ["Volcanoes & earthquakes", "Rocks, gems & crystals", "Deserts & ice", "Rivers & lakes", "Earth long ago", "Maps & places"],
+  ocean: ["Deep-sea creatures", "Coral reefs", "Whales & dolphins", "Waves, tides & currents", "Shipwrecks & exploring", "Ocean myths"],
+  universe: ["Planets & moons", "Stars & the Sun", "Astronauts & missions", "Black holes & galaxies", "Life in space", "Space myths"],
+  history: ["Ancient worlds", "Everyday life long ago", "Famous mix-ups", "Food history", "Inventors & explorers", "History myths"],
+  tech: ["Everyday objects", "Cars, trains & planes", "Phones & computers", "Accidental inventions", "Home & kitchen", "Why is it built that way?"],
+  body: ["Brain & senses", "Bones & muscles", "Heart & blood", "Sleep & dreams", "Food & digestion", "Body myths"]
+};
+function renderChips(){
+  const box = $("#ideaChips"); box.innerHTML = "";
+  const mk = (label, angle) => { const c = el("button", { class: "idea-chip", type: "button", text: label }); c.onclick = () => fetchFresh(angle, c); return c; };
+  box.append(mk("🎲 Surprise me", ""));
+  (ANGLES[state.drawer] || []).forEach(a => box.append(mk(a, a)));
+}
+function setBusy(on){ $("#moreBtn").disabled = on; document.querySelectorAll("#ideaChips .idea-chip").forEach(c => c.disabled = on); }
 function updateMoreBtn(){
   const b = $("#moreBtn");
   b.textContent = state.queue.length ? "Show Me 3 More" : "Show Me 3 More (fresh from the sources)";
@@ -723,18 +751,26 @@ async function dealMore(){
     updateMoreBtn();
     return;
   }
-  btn.disabled = true; msg.innerHTML = ""; msg.append(loadingEl("Mr. Paul is finding 3 brand-new secrets and checking every one…"));
+  fetchFresh("");
+}
+async function fetchFresh(angle, chip){
+  const grid = $("#edGrid"), msg = $("#moreMsg");
+  document.querySelectorAll("#ideaChips .idea-chip").forEach(c => c.classList.toggle("on", c === chip));
+  setBusy(true); msg.innerHTML = "";
+  msg.append(loadingEl(angle ? "Mr. Paul is digging into " + angle + " and checking every secret…" : "Mr. Paul is finding 3 brand-new secrets and checking every one…"));
   try {
     const bank = state.data.secrets.filter(s => s.drawer === state.drawer).map(s => s.headline);
     const prev = state.liveHeads[state.drawer] || [];
-    const r = await api("/api/ask", { mode: "more", level: state.level, drawer: state.drawer, exclude: [...bank, ...prev, ...state.shown.map(s => s.headline)] });
+    const shownNow = state.shown.map(s => s.headline);
+    const exclude = [...new Set([...bank, ...prev, ...shownNow])];
+    const r = await api("/api/ask", { mode: "more", level: state.level, drawer: state.drawer, angle, exclude });
     msg.textContent = "";
-    if (!r.secrets || !r.secrets.length){ msg.textContent = "Mr. Paul couldn't confirm any new secrets with strong enough sources this time, so he won't guess. Please try again."; }
+    if (!r.secrets || !r.secrets.length){ msg.textContent = "Mr. Paul couldn't confirm new secrets with strong enough sources this time, so he won't guess. Try again or pick another direction."; }
     (r.secrets || []).forEach(s => { state.shown.push(s); grid.append(renderCard(s)); });
-    state.liveHeads[state.drawer] = [...prev, ...(r.secrets || []).map(s => s.headline)].slice(-80);
+    state.liveHeads[state.drawer] = [...prev, ...(r.secrets || []).map(s => s.headline)].slice(-400);
     store.set("sotw_live_heads", state.liveHeads);
   } catch(e){ msg.textContent = e.message; }
-  btn.disabled = false; updateMoreBtn();
+  setBusy(false); updateMoreBtn();
 }
 
 /* ---------- I Heard That ---------- */
