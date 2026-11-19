@@ -74,7 +74,7 @@ WRITING STYLE:
 - Never call the tool or its content "free."
 - No markdown, no asterisks. Plain sentences.
 
-OUTPUT: After your research, reply with ONLY a JSON object wrapped in <json> and </json> tags, following the exact shape the user message asks for.`;
+OUTPUT: Never put citation tags or markup (like <cite ...>) inside the JSON text; write plain sentences. After your research, reply with ONLY a JSON object wrapped in <json> and </json> tags, following the exact shape the user message asks for.`;
 
 function modePrompt(mode, b, level) {
   const lvl = level === "grown" ? "grown" : "kids";
@@ -220,7 +220,9 @@ function extractJson(text) {
   raw = raw.trim().replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
   try { return JSON.parse(raw); } catch (e) { return null; }
 }
-const clip = (s, n) => String(s || "").replace(/\*\*/g, "").slice(0, n);
+// Remove citation tags the model sometimes writes into its answers (e.g. <cite index="21-8">...</cite>), plus markdown bold.
+const cleanText = s => String(s || "").replace(/<\/?cite\b[^>]*>/gi, "").replace(/<\/?(antml:)?[a-z_]+:?[a-z_]*\b[^>]*>/gi, m => /^<\/?(b|i|u|br)\b/i.test(m) ? m : "").replace(/\*\*/g, "").replace(/[ \t]{2,}/g, " ").trim();
+const clip = (s, n) => cleanText(s).slice(0, n);
 const okVerdict = v => (["true", "partly", "busted", "none"].includes(v) ? v : "none");
 
 async function anthropic(messages, maxSearches) {
