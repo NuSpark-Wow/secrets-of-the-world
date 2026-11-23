@@ -557,6 +557,8 @@ function actionBar(card){
   const bar = el("div", { class: "actions" });
   const items = [
     ["❓ Ask About This", askPanel],
+    ["🔬 How Do We Know?", knowPanel],
+    ["🔗 Secret Chain", chainPanel],
     ["⚖️ Challenge This", challengePanel],
     ["👀 Another Set of AI Eyes", eyesPanel],
     ["📤 Share", sharePanel]
@@ -609,6 +611,33 @@ function askPanel(card, panel){
     el("div", { class: "row" }, el("button", { class: "btn", type: "button", text: "Ask", onclick: () => go() })),
     out
   );
+}
+
+// How Do We Know?: how scientists or historians found this out — the part a search engine never shows.
+function knowPanel(card, panel){
+  const s = card._secret;
+  const out = el("div", {}); out.append(loadingEl("Mr. Paul is digging into how we found this out…"));
+  panel.append(out);
+  const q = "How do we know this is true? Explain how scientists, historians or inventors actually found it out: the discovery, the measurement or experiment, the tools they used, and who figured it out and when, if known.";
+  api("/api/ask", { mode: "ask", level: state.level, question: q, secret: { headline: s.headline, text: textOf(s) } })
+    .then(r => { out.innerHTML = ""; out.append(resultBox(r.confirmed ? "Here's how we know:" : "Hmm…", r.answer, r.sources, null)); })
+    .catch(e => { out.innerHTML = ""; out.append(resultBox("Hmm…", e.message)); });
+}
+
+// Secret Chain: a related secret from a DIFFERENT drawer, so the curiosity keeps going.
+const CHAIN_STOP = new Set("about after again also because before being below between could every first found from have into just like little longer makes many more most much never only other over really same some such than that their them then there these they thing this those through times under very were what when where which while with would your years".split(" "));
+function chainWords(x){ return new Set(String(x || "").toLowerCase().match(/[a-z]{5,}/g)?.filter(w => !CHAIN_STOP.has(w)) || []); }
+function chainPanel(card, panel){
+  const s = card._secret;
+  const mine = chainWords(s.headline + " " + textOf(s));
+  const pool = state.data.secrets.filter(x => x.drawer !== s.drawer && x.id !== s.id && !(state.chainShown || {})[x.id]);
+  if (!pool.length){ panel.append(resultBox("That's the whole chain!", "You've followed every link. Open a drawer for brand-new secrets.")); return; }
+  const scored = pool.map(x => { const w = chainWords(x.headline + " " + textOf(x)); let n = 0; w.forEach(z => { if (mine.has(z)) n++; }); return [n + Math.random() * 0.5, x]; }).sort((a, b) => b[0] - a[0]);
+  const next = scored[0][1];
+  state.chainShown = state.chainShown || {}; state.chainShown[next.id] = 1;
+  const d = drawerInfo(next.drawer);
+  panel.append(el("div", { class: "ex", text: "🔗 This one links to the " + d.icon + " " + d.name + " drawer:" }));
+  panel.append(renderCard(next));
 }
 
 function challengePanel(card, panel){
